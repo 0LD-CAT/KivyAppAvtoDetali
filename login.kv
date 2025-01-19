@@ -1,0 +1,140 @@
+<ScreenManagement>:
+    LoginScreen:
+    RegisterScreen:
+    ShopDetailsApp:
+
+<LoginScreen>:
+    name: 'login'
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 220
+        spacing: 10
+
+        Label:
+            text: 'Вход'
+            font_size: 24
+            size_hint_y: None
+            height: 40
+
+        TextInput:
+            id: phone_input
+            hint_text: 'Номер телефона'
+            multiline: False
+            size_hint_y: None
+            height: 40
+
+        TextInput:
+            id: password_input
+            hint_text: 'Пароль'
+            multiline: False
+            password: True
+            size_hint_y: None
+            height: 40
+
+        Button:
+            text: 'Войти'
+            size_hint_y: None
+            height: 50
+            on_press: root.login()
+
+        Button:
+            text: 'Зарегистрироваться'
+            size_hint_y: None
+            height: 50
+            on_press: app.root.current = 'register'
+
+<RegisterScreen>:
+    name: 'register'
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 220
+        spacing: 10
+
+        Label:
+            text: 'Регистрация'
+            font_size: 24
+            size_hint_y: None
+            height: 40
+
+        TextInput:
+            id: phone_input
+            hint_text: 'Номер телефона'
+            multiline: False
+            size_hint_y: None
+            height: 40
+
+        TextInput:
+            id: password_input
+            hint_text: 'Пароль'
+            multiline: False
+            password: True
+            size_hint_y: None
+            height: 40
+
+        Button:
+            text: 'Зарегистрироваться'
+            size_hint_y: None
+            height: 50
+            on_press: root.register()
+
+        Button:
+            text: 'Назад к входу'
+            size_hint_y: None
+            height: 50
+            on_press: app.root.current = 'login'
+<ShopDetailsApp>:
+    name: 'main'
+    BoxLayout:
+        orientation: 'vertical'
+        Spinner:
+            id: spinner
+            text: "Марка машины"
+            values: ["Lada", "BMW", "Mazda", "Mercedes", "Volvo", "Honda"]
+            background_color: (0 / 255, 255 / 255, 0 / 255, 1)
+            size_hint: (0.3, 0.2)
+            on_text: root.on_spinner_select()
+
+        Button:
+            text: 'Выход'
+            size_hint: (None, None)
+            size: (150, 40)
+            pos_hint: {"right": 1, "top": 0}
+            background_color: (1, 0, 0, 1)
+            on_press: root.open_login_app()
+
+        Label:
+            id: cart_label
+            text: 'Корзина: 0 руб.'
+            size_hint: (0.3, 0.1)
+            pos_hint: {"top": 1}
+
+        ScrollView:
+            GridLayout:
+                id: details_box
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+
+        Button:
+            text: 'Очистить корзину'
+            size_hint: (None, None)
+            size: (150, 40)
+            pos_hint: {"right": 1, "top": 1}
+            background_color: (0, 1, 0, 1)
+            on_press: root.clear_cart()
+        Spinner:
+            id: spinner2
+            text: "Выбор способа доставки"
+            values: ["Стандарт - 1000руб.", "Экспресс - 5000руб."]
+            background_color: (0 / 255, 255 / 255, 0 / 255, 1)
+            size_hint: (0.3, 0.1)
+            on_text: root.DeliverySelect()
+        Button:
+            text: 'Заказать'
+            size_hint: (None, None)
+            size: (150, 40)
+            pos_hint: {"right": 1, "top": .8}
+            background_color: (0, 0, 1, 1)
+            on_press: root.payment()
